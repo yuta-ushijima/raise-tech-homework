@@ -15,6 +15,12 @@ describe "nginxについてのテスト" do
         expect be_running
       end
     end
+
+    describe port(80) do
+      it "80ポートがrunningであること" do
+        expect be_listening
+      end
+    end
   end
 end
 
