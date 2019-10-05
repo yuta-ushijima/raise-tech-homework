@@ -1,0 +1,11 @@
+---
+- name: Playbook for sample application
+  hosts: web-app
+  become: yes
+  roles:
+    - git
+    - nginx
+    - nodejs
+    - mysql
+    - ruby
+    - vim

@@ -1,0 +1,6 @@
+---
+- name: Install vim of latest version
+  yum:
+    name: vim
+    state: latest
+    lock_timeout: 180

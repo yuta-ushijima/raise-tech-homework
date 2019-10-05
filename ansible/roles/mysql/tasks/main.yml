@@ -1,0 +1,28 @@
+---
+ - name: Add mysql 8.0 repository (also includes 5.7)
+   yum: 
+     name: https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
+     lock_timeout: 180
+        
+ - name: Disable mysql 8.0 Repository
+   command: >
+     yum-config-manager --disable mysql80-community
+
+ - name: Enable mysql 5.7 Repository
+   command: >
+     yum-config-manager --enable mysql57-community
+
+ - name: Add MySQL repository
+   yum: 
+     name: mysql-community-server
+     lock_timeout: 180
+
+ - name: Setting up automatic startup of mysql
+   service: 
+     name: mysqld state=started enabled=yes
+
+ - name: Start MySQL service
+   service:
+    name: mysqld
+    enabled: yes
+    state: started
