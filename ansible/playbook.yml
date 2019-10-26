@@ -1,6 +1,6 @@
 ---
 - name: Playbook for sample application
-  hosts: tag_Name_*aws-cf-new-project-ec2
+  hosts: tag_Name_aws*
   become: yes
   roles:
     - git
