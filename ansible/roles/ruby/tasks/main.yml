@@ -27,7 +27,7 @@
      dest: /usr/local/rbenv 
  
  - name: Edit bashrc
-   templates:
+   template:
      src: roles/ruby/templates/rbenv_system.sh.j2
      dest: /etc/profile.d/rbenv.sh
      owner: ec2-user

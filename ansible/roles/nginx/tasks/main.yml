@@ -21,7 +21,7 @@
   
 - name: Set auto start nginx
   become: yes
-  shell: chkconfig nginx on
+  shell: /sbin/chkconfig nginx on
 
 - name: Restart nginx
-  shell: service nginx restart
+  shell: /sbin/service nginx restart
