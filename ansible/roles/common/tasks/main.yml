@@ -1,0 +1,22 @@
+---
+- name: Comment out of default source_path
+  become: yes
+  linefile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^Defaults   source_path = /sbin:/bin:/usr/sbin:/usr/bin'
+    line: '# Defaults   source_path = /sbin:/bin:/usr/sbin:/usr/bin'
+    validate: '/usr/sbin/visudo -cf %s'
+
+
+- name: Enable env_reset and env_keep for PATH
+  become: yes
+  blockinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '# Defeaults env_keep += "HOME"'
+    content: |
+      Defaults env_reset
+      Defaults env_keep += "PATH"
+    validate: '/usr/sbin/visudo -cf %s'
+

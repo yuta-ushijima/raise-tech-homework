@@ -24,24 +24,19 @@
  - name: Install rbenv
    git:
      repo: https://github.com/sstephenson/rbenv.git
-     dest: ~/.rbenv 
-
- - name: export RBENV_ROOT to bash_profile
-   shell: echo 'export RBENV_ROOT="/home/ec2-user/.rbenv"' >> ~/.bash_profile
+     dest: /usr/local/rbenv 
  
- - name: export rbenv path to bash_profile
-   shell: echo 'export PATH="${RBENV_ROOT}/bin:${PATH}"' >> ~/.bash_profile
-
- - name: export rbenv init path to bash_profile
-   shell: echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
- 
- - name: source bash_profile
-   shell: source ~/.bash_profile
+ - name: Edit bashrc
+   templates:
+     src: roles/ruby/templates/rbenv_system.sh.j2
+     dest: /etc/profile.d/rbenv.sh
+     owner: ec2-user
+     group: ec2-user
 
  - name: Install ruby-build
    git:
      repo: https://github.com/sstephenson/ruby-build.git
-     dest: ~/.rbenv/plugins/ruby-build
+     dest: /usr/local/rbenv/plugins/ruby-build
 
  - name: Copy .gemrc to ~/.gemrc to Avoid to Install rb-docs
    become: yes
@@ -49,8 +44,8 @@
      src: .gemrc
      dest: ~/.gemrc
 
- #- name: Install ruby
- #  shell: bash -lc  "rbenv install 2.6.1"
+ - name: Install ruby
+   shell: bash -lc "rbenv install -s 2.6.1"
 
  - name: Enable ruby installed version
    shell: bash -lc "rbenv global 2.6.1 && rbenv rehash"

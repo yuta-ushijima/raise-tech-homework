@@ -1,8 +1,9 @@
 ---
 - name: Playbook for sample application
-  hosts: tag_Name_aws*
+  hosts: tag_Name_awsCfNewProjectEc2
   become: yes
   roles:
+    - common
     - git
     - nginx
     - nodejs
